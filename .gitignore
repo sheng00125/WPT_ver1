@@ -1,0 +1,62 @@
+﻿1.uvguix.l
+
+1.uvoptx
+1.uvguix.l
+1.uvoptx
+1.uvguix.l
+*.l
+
+
+*.bak 
+*.ddk
+*.edk
+*.lst
+*.lnp
+*.mpf
+*.mpj 
+*.omf
+*.obj 
+*.plg
+*.rpt
+*.tmp
+*.__i
+*.crf
+*.o
+*.d 
+*.axf
+*.tra
+*.dep
+*.iex
+*.sct
+*.htm
+*.map
+
+/OBJ
+
+！*.opt
+/OBJ/
+
+!*.c   
+!*.h  
+!*.uvprojx
+!JLinkSettings.ini
+   *.log  
+   *.plg  
+   *.bak  
+   *.dep  
+   *.uvgui.*  
+   JLinkLog.txt  
+   *.o  
+   *.d  
+   *.crf  
+   *.tra  
+   *.axf  
+   *.hex  
+   *.lnp  
+   *.sct  
+   *.__i  
+   *.htm  
+JLinkLog.txt
+JLinkLog.txt
+*.map
+1.uvguix.sheng
