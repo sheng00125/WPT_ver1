@@ -64,6 +64,7 @@ extern int pwm;
 		Get_Adc_Window11(ADC_InjectedChannel_2);
 		Get_Adc_Window22(ADC_InjectedChannel_3);
 		Get_Adc_Window33(ADC_InjectedChannel_4);
+		
 		a0= GetMedianNum(b0, 201);
 		a1= GetMedianNum(b1, 201);
 		a2= GetMedianNum(b2, 201);
