@@ -17,21 +17,21 @@ void TIM1_PWM_Init(u16 arr,u16 psc)
 	TIM_BDTRInitTypeDef TIM_BDTRInitStructure;
 	NVIC_InitTypeDef NVIC_InitStructure;
 
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIOB |RCC_APB2Periph_TIM1 | RCC_APB2Periph_AFIO, ENABLE); //使能TIMx外设
-
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIOB| RCC_APB2Periph_GPIOE |RCC_APB2Periph_TIM1|RCC_APB2Periph_AFIO, ENABLE); //使能TIMx外设
+	GPIO_PinRemapConfig(GPIO_FullRemap_TIM1, ENABLE);
   TIM_DeInit(TIM1);
   TIM_InternalClockConfig(TIM1);
  
   //设置该引脚为复用输出功能,输出TIM1 CH1的PWM脉冲波形
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_8; //TIM1_CH1
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9; //TIM1_CH1
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;  //复用功能输出
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-	GPIO_Init(GPIOA, &GPIO_InitStructure); //初始化GPIO
+	GPIO_Init(GPIOE, &GPIO_InitStructure); //初始化GPIO
  	
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13; //TIM1_CH1N
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_8; //TIM1_CH1N
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;  //复用功能输出
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-	GPIO_Init(GPIOB, &GPIO_InitStructure); //初始化GPIO
+	GPIO_Init(GPIOE, &GPIO_InitStructure); //初始化GPIO
 	
 	TIM_TimeBaseStructure.TIM_Period = arr; //设置自动重装载周期值
 	TIM_TimeBaseStructure.TIM_Prescaler =psc; //设置预分频值 不分频
@@ -106,8 +106,8 @@ void TIM8_PWM_Init(u16 arr,u16 psc)
 	TIM_BDTRInitTypeDef TIM_BDTRInitStructure;
 	
 
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC|RCC_APB2Periph_GPIOB | RCC_APB2Periph_TIM8 | RCC_APB2Periph_AFIO, ENABLE); //使能TIMx外设
-//  GPIO_PinRemapConfig(GPIO_PartialRemap_TIM8, ENABLE);
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC|RCC_APB2Periph_GPIOB | RCC_APB2Periph_TIM8 , ENABLE); //使能TIMx外设
+  
   TIM_DeInit(TIM8);
   TIM_InternalClockConfig(TIM8);
  
@@ -140,7 +140,7 @@ void TIM8_PWM_Init(u16 arr,u16 psc)
  TIM_OCInitStructure.TIM_OutputNState=TIM_OutputNState_Enable;	
  TIM_OCInitStructure.TIM_OCIdleState=TIM_OCIdleState_Reset; 	//???????
  TIM_OCInitStructure.TIM_OCNIdleState=TIM_OCNIdleState_Reset;
- TIM_OC1Init(TIM8,&TIM_OCInitStructure);   	//根据指定的参数初始化外设TIMx
+// TIM_OC1Init(TIM8,&TIM_OCInitStructure);   	//根据指定的参数初始化外设TIMx
  TIM_OC2Init(TIM8,&TIM_OCInitStructure);
 
 

@@ -51,10 +51,15 @@ u8 mode;
 	delay_init();	    	 //延时函数初始化	  
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2); 	 //设置NVIC中断分组2:2位抢占优先级，2位响应优先级
  	LED_Init();			     //LED端口初始化
-//	TIM3_Int_Init(199,7199);//10Khz的计数频率，计数到200为20ms  
-//	TIM4_PWM_Init(899,0);	 //不分频。PWM频率=72000000/900=80Khz
-//  TIM1_PWM_Init((int)(72000000/f),0);	 //不分频。PWM频率=72000000/1028=69Khz
-//	TIM8_PWM_Init((int)(72000000/f),0);	 //不分频。PWM频率=72000000/1028=69Khz
+	TIM3_Int_Init(199,7199);//10Khz的计数频率，计数到200为20ms  
+	TIM4_PWM_Init(899,0);	 //不分频。PWM频率=72000000/900=80Khz
+  TIM1_PWM_Init((int)(72000000/f),0);	 //不分频。PWM频率=72000000/1028=69Khz
+	 	 
+//24L01 初始化
+	NRF24L01_Init();
+	mode=NRF_MODE_RX;//设置发送或接受模式
+
+	TIM8_PWM_Init((int)(72000000/f),0);	 //不分频。PWM频率=72000000/1028=69Khz
 	Adc_Init();		  		//ADC初始化
 
 	LCD_init(); //?????    
@@ -64,11 +69,8 @@ u8 mode;
 	 	TIM_SetCompare1(TIM1,(int)(1028/2));		   // 设置TIM1通道1占空比 = 580/1160
 		TIM_SetCompare2(TIM8,(int)(1028/2));		   // 设置TIM8通道2占空比 = 580/1160
 	 
-	 
-	 
-//24L01 初始化
-	NRF24L01_Init();
-	mode=NRF_MODE_RX;//设置发送或接受模式
+	 delay_ms(200);
+
 	 
 	while(NRF24L01_Check())	//检查NRF24L01是否在位.	
 	{
@@ -85,12 +87,12 @@ u8 mode;
 		{
 							NRF24L01_RX_Mode();
 							if(NRF24L01_RxPacket(tmp_buf)==0)//一旦接收到信息,则显示出来.
-							{
-								
+							{		
 								delay_ms(100);	
 							}else 
-								{delay_ms(100);}
-								
+							{
+								delay_ms(100);
+							}
 		}	
 		
 		

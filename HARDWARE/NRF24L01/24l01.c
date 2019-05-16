@@ -75,9 +75,14 @@ u8 NRF24L01_Check(void)
 	SPI2_SetSpeed(SPI_BaudRatePrescaler_4); //spi速度为9Mhz（24L01的最大SPI时钟为10Mhz）   	 
 	NRF24L01_Write_Buf(NRF_WRITE_REG+TX_ADDR,buf,5);//写入5个字节的地址.	
 	NRF24L01_Read_Buf(TX_ADDR,buf,5); //读出写入的地址  
-	for(i=0;i<5;i++)if(buf[i]!=0XA5)break;	 							   
-	if(i!=5)return 1;//检测24L01错误	
-	return 0;		 //检测到24L01
+	for(i=0;i<5;i++)
+			if(buf[i]!=0XA5)
+				break;	 							   
+			if(i!=5)
+				return 1;
+	//检测24L01错误	
+	return 0;		 
+	//检测到24L01
 }	
 
 //SPI写寄存器
