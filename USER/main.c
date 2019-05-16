@@ -24,7 +24,7 @@ TIM8的CH2和CH2N 产生带有死区的PWM波
 
 // ADC1 Chanel0,1,2,3  -> PA0,1,2,3
 	u16 adcx0,adcx1,adcx2,adcx3;
-	float temp0,temp1,temp2,temp3,temp;
+float temp0,temp1,temp2,temp3,temp;
 int a1,a2,a3,a0,a;
 u16 I1=0;
 int b0[200]={0};int b1[200]={0};int b2[200]={0};int b3[200]={0};
@@ -38,6 +38,9 @@ float Target_Uo=60.0;
 u8 D=50;    // 通道1占空比
 extern int pwm;
 
+void DataParser(void) ;
+extern u32 receive0,receive1,receive2,receive3;
+extern float receivetemp0,receivetemp1,receivetemp2,receivetemp3;
 
 //设置NRF24L01的发送或者接收模式
 u8 tmp_buf[32];	
@@ -91,6 +94,7 @@ u8 mode;
 							NRF24L01_RX_Mode();
 							if(NRF24L01_RxPacket(tmp_buf)==0)//一旦接收到信息,则显示出来.
 							{		
+								DataParser();
 								delay_ms(100);	
 							}else 
 							{
@@ -142,4 +146,7 @@ u8 mode;
 
 	}	 
  }
+ 
+
+
 

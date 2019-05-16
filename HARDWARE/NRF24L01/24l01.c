@@ -10,6 +10,43 @@
     
 const u8 TX_ADDRESS[TX_ADR_WIDTH]={0x34,0x43,0x10,0x10,0x01}; //发送地址
 const u8 RX_ADDRESS[RX_ADR_WIDTH]={0x34,0x43,0x10,0x10,0x01};
+extern u8 tmp_buf[32];	
+u32 receive0,receive1,receive2,receive3;
+float receivetemp0,receivetemp1,receivetemp2,receivetemp3;
+
+ void DataFilling(u32 tempvalue0,u32 tempvalue1,u32 tempvalue2,u32 tempvalue3) 
+{
+	tmp_buf[0]=(u8)tempvalue0&0xff;
+	tmp_buf[1]=((u8)(tempvalue0>>8))&0xff;
+	tmp_buf[2]=((u8)(tempvalue0>>16))&0xff;
+	tmp_buf[3]=((u8)(tempvalue0>>24))&0xff;	
+		tmp_buf[4]=(u8)tempvalue1&0xff;
+	tmp_buf[5]=((u8)(tempvalue1>>8))&0xff;
+	tmp_buf[6]=((u8)(tempvalue1>>16))&0xff;
+	tmp_buf[7]=((u8)(tempvalue1>>24))&0xff;	
+			tmp_buf[8]=(u8)tempvalue2&0xff;
+	tmp_buf[9]=((u8)(tempvalue2>>8))&0xff;
+	tmp_buf[10]=((u8)(tempvalue2>>16))&0xff;
+	tmp_buf[11]=((u8)(tempvalue2>>24))&0xff;	
+			tmp_buf[12]=(u8)tempvalue3&0xff;
+	tmp_buf[13]=((u8)(tempvalue3>>8))&0xff;
+	tmp_buf[14]=((u8)(tempvalue3>>16))&0xff;
+	tmp_buf[15]=((u8)(tempvalue3>>24))&0xff;	
+}
+
+void DataParser(void) 
+{
+
+	receive0 = ((u32)tmp_buf[3]<<24)|((u32)tmp_buf[2]<<16)|((u32)tmp_buf[1]<<8)|((u32)tmp_buf[0]);
+	receive1 = ((u32)tmp_buf[7]<<24)|((u32)tmp_buf[6]<<16)|((u32)tmp_buf[5]<<8)|((u32)tmp_buf[4]);
+	receive2 = ((u32)tmp_buf[11]<<24)|((u32)tmp_buf[10]<<16)|((u32)tmp_buf[9]<<8)|((u32)tmp_buf[8]);
+	receive3 = ((u32)tmp_buf[15]<<24)|((u32)tmp_buf[14]<<16)|((u32)tmp_buf[13]<<8)|((u32)tmp_buf[12]);
+	receivetemp0=(float)(receive0*0.0033-4.8);
+	receivetemp1=(float)(receive1*0.0161-0.2668);
+	receivetemp2=(float)receive2*(3.3/4096);
+	receivetemp3=(float)receive3*(3.3/4096);
+}
+
 
 //初始化24L01的IO口
 void NRF24L01_Init(void)
