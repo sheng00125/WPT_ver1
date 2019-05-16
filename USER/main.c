@@ -55,7 +55,7 @@ u8 mode;
 	TIM4_PWM_Init(899,0);	 //不分频。PWM频率=72000000/900=80Khz
   TIM1_PWM_Init((int)(72000000/f),0);	 //不分频。PWM频率=72000000/1028=69Khz
 	
- 	 
+ 	//222
 //24L01 初始化
 	NRF24L01_Init();
 	mode=NRF_MODE_RX;//设置发送或接受模式
