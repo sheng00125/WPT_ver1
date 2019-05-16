@@ -1,1 +1,64 @@
 # WPT_ver1
+
+NRF24L01
+PA4 CE
+PC4 CS
+PC5 IRQ
+
+PA5 SCK
+PA6 MOSI
+PA7 MISO
+
+
+TIM1
+PA8->PE9 CH1+
+PB13->PE8 CH1-
+
+TIM8
+PC7 CH2+
+PB0 CH2-
+
+ADC
+
+PA0
+PA1
+PA2
+PA3
+
+Nokia5110
+PD6\7
+PG9\10\11
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
