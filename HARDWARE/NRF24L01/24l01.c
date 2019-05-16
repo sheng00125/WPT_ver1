@@ -218,5 +218,17 @@ void NRF24L01_TX_Mode(void)
 }
 
 
-
+void Init_Buffer (unsigned char *P,unsigned int Count,unsigned char Type) 
+{
+  unsigned int i;
+  
+   if(Type==0)
+   {
+     for(i=0;i<Count;i++)*P++=0x00;
+   }
+   else
+   {
+     for(i=0;i<Count;i++)*P++=0xFF;
+   }
+}
 

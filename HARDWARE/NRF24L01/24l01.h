@@ -6,7 +6,8 @@
 //NRF24L01驱动代码	   
 					  
 //////////////////////////////////////////////////////////////////////////////////
-    
+#define NRF_MODE_TX 0
+#define NRF_MODE_RX 1
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 //NRF24L01寄存器操作命令
 #define NRF_READ_REG    0x00  //读配置寄存器,低5位为寄存器地址
@@ -71,6 +72,9 @@ u8 NRF24L01_Write_Reg(u8 reg, u8 value);		//写寄存器
 u8 NRF24L01_Check(void);						//检查24L01是否存在
 u8 NRF24L01_TxPacket(u8 *txbuf);				//发送一个包的数据
 u8 NRF24L01_RxPacket(u8 *rxbuf);				//接收一个包的数据
+
+void Init_Buffer (unsigned char *P,unsigned int Count,unsigned char Type);
+
 #endif
 
 
