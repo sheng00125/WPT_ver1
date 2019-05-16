@@ -45,6 +45,8 @@ u8 mode;
 
 
 
+
+
  int main(void)
  {		
 	int f=71728;
