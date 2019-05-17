@@ -45,35 +45,34 @@ extern float receivetemp0,receivetemp1,receivetemp2,receivetemp3;
 //设置NRF24L01的发送或者接收模式
 u8 tmp_buf[32];	
 u8 mode;
-
-
-
+u16 shift_angle=400;
+int fv=70000;
 
 
  int main(void)
  {		
-	int f=71728;
+	
 	delay_init();	    	 //延时函数初始化	  
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2); 	 //设置NVIC中断分组2:2位抢占优先级，2位响应优先级
  	LED_Init();			     //LED端口初始化
 	TIM3_Int_Init(199,7199);//10Khz的计数频率，计数到200为20ms  
 	TIM4_PWM_Init(899,0);	 //不分频。PWM频率=72000000/900=80Khz
-  TIM1_PWM_Init((int)(72000000/f),0);	 //不分频。PWM频率=72000000/1028=69Khz
+  TIM1_PWM_Init((int)(72000000/fv),0);	 //不分频。PWM频率=72000000/1028=69Khz
 	
  	//222
 //24L01 初始化
 	NRF24L01_Init();
 	mode=NRF_MODE_RX;//设置发送或接受模式
 
-	TIM8_PWM_Init((int)(72000000/f),0);	 //不分频。PWM频率=72000000/1028=69Khz
+	TIM8_PWM_Init((int)(72000000/fv),0);	 //不分频。PWM频率=72000000/1028=69Khz
 	Adc_Init();		  		//ADC初始化
 
 	LCD_init(); //?????    
 	LCD_clear(); 
 	 pwm=180;
 	 
-	 	TIM_SetCompare1(TIM1,(int)(1028/2));		   // 设置TIM1通道1占空比 = 580/1160
-		TIM_SetCompare2(TIM8,(int)(1028/2));		   // 设置TIM8通道2占空比 = 580/1160
+	 	TIM_SetCompare1(TIM1,(int)((72000000/fv)/2));		   // 设置TIM1通道1占空比 = 580/1160
+		TIM_SetCompare2(TIM8,(int)((72000000/fv)/2));		   // 设置TIM8通道2占空比 = 580/1160
 	 
 	 delay_ms(200);
 

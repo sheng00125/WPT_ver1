@@ -14,6 +14,8 @@ void TIM3_IRQHandler(void)   //TIM3中断
 		temp1=(float)(a1*0.0161-0.2668);
 		temp2=(float)a2*(3.3/4096);
 		temp3=(float)a3*(3.3/4096);
+//		shift_angle=shift_angle-Position_PID(receivetemp0,Target_Uo);              //===位置PID控制器
+		limit_shift_angle();
 //		pwm=pwm-Position_PID(temp1,Target_Uo);              //===位置PID控制器
 		limit_pwm();                                       //===PWM限幅
 //		
@@ -58,3 +60,15 @@ void limit_pwm(void)
 		if(pwm<=Amplitude_Low)  pwm=Amplitude_Low;	
 	
 }
+void limit_shift_angle(void)
+{ 
+		int Amplitude_High=(int)(72000000/fv/2)-30;    //===PWM满幅是899 限制在899
+	  int Amplitude_Low=80;     //===PWM低于200，电机停止转速
+    if(	shift_angle>=Amplitude_High) 	
+			shift_angle=Amplitude_High;	
+		if(	shift_angle<=Amplitude_Low)  	
+			shift_angle=Amplitude_Low;	
+	  TIM1->CCR2=shift_angle;
+	
+}
+

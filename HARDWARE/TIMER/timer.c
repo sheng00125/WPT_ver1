@@ -57,7 +57,7 @@ void TIM1_PWM_Init(u16 arr,u16 psc)
  TIM_BDTRInitStructure.TIM_OSSRState = TIM_OSSRState_Disable;
  TIM_BDTRInitStructure.TIM_OSSIState = TIM_OSSIState_Disable;
  TIM_BDTRInitStructure.TIM_LOCKLevel = TIM_LOCKLevel_OFF; 
- TIM_BDTRInitStructure.TIM_DeadTime = 7; 	// 7*Tdts  =1/72M = 7*13.89ns
+ TIM_BDTRInitStructure.TIM_DeadTime = 23; 	// 7*Tdts  =1/72M = 7*13.89ns
  TIM_BDTRInitStructure.TIM_Break = TIM_Break_Disable; //??????
  TIM_BDTRInitStructure.TIM_BreakPolarity = TIM_BreakPolarity_High;	//??????
  TIM_BDTRInitStructure.TIM_AutomaticOutput = TIM_AutomaticOutput_Enable;
@@ -71,7 +71,7 @@ void TIM1_PWM_Init(u16 arr,u16 psc)
 	
 	TIM_CtrlPWMOutputs(TIM1,ENABLE);	//MOE 主输出使能,高级定时器必须开启这个 
 	
-	TIM1->CCR2=300;         // 改变移项角
+	TIM1->CCR2=400;         // 改变移项角
 	
 	TIM_ITConfig(TIM1, TIM_IT_CC2, ENABLE);
 	NVIC_InitStructure.NVIC_IRQChannel = TIM1_CC_IRQn;    
@@ -148,7 +148,7 @@ void TIM8_PWM_Init(u16 arr,u16 psc)
  TIM_BDTRInitStructure.TIM_OSSRState = TIM_OSSRState_Disable;
  TIM_BDTRInitStructure.TIM_OSSIState = TIM_OSSIState_Disable;
  TIM_BDTRInitStructure.TIM_LOCKLevel = TIM_LOCKLevel_OFF; 
- TIM_BDTRInitStructure.TIM_DeadTime = 7; 	//????
+ TIM_BDTRInitStructure.TIM_DeadTime = 23; 	//????
  TIM_BDTRInitStructure.TIM_Break = TIM_Break_Disable; //??????
  TIM_BDTRInitStructure.TIM_BreakPolarity = TIM_BreakPolarity_High;	//??????
  TIM_BDTRInitStructure.TIM_AutomaticOutput = TIM_AutomaticOutput_Enable;
